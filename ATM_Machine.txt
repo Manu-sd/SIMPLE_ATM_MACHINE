@@ -1,0 +1,49 @@
+ATM_PIN = 2026
+failed_attempts = 0
+account_balance = 1000
+
+def access_granted():
+    global account_balance
+    while True:
+        print("\nATM Menu")
+        print("\n1. Check balance")
+        print("2. Withdraw")
+        print("3. Deposit")
+        print("4. Exit")
+
+        choice = int(input("Enter your choice: "))
+        if choice == 1:
+            print("Your account balance is", account_balance)
+        elif choice == 2:
+            amount = int(input("Enter the amount to withdraw: "))
+            if amount > account_balance:
+                print("Insufficient funds")
+            else:
+                account_balance -= amount
+                print("Your balance is", account_balance)
+        elif choice == 3:
+            amount = int(input("Enter the amount to deposit: "))
+            account_balance += amount
+            print("Your balance is", account_balance)
+        elif choice == 4:
+            print("Exit successful")
+            break
+        else:
+            print
+
+input_pin = int(input("Enter your pin: "))
+if input_pin == ATM_PIN:
+    print("Welcome to your account")
+    access_granted()
+else:
+    print("Invalid pin")
+    for i in range(2):
+        input_pin = int(input("Enter your pin: "))
+        if input_pin == ATM_PIN:
+            print("Welcome to your account")
+            access_granted()
+            break
+        else:
+            print("Invalid pin")
+    else:
+        print("Your account is locked")
